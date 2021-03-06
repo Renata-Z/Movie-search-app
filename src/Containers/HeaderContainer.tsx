@@ -23,11 +23,11 @@ export const HeaderContainer = () => {
     console.log('searching');
   };
 
-  // const openAutocomplete = () => {
-  //   if (movieList) {
-  //     console.log(movieList);
-  //   }
-  // };
+  const openAutocomplete = () => {
+    if (movieList) {
+      console.log(movieList);
+    }
+  };
 
   return (
     <Header
