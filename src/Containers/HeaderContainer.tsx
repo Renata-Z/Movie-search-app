@@ -1,11 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Header } from '../Components/Header';
 import { MovieList, MovieApiData } from '../utils/types';
 
 export const HeaderContainer = () => {
   const [inputValue, setinputValue] = useState('');
   const [movieList, setMovieList] = useState<MovieList[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     const apiKey = 'e28f9fb961ad7686205a9e20b8f92dcb';
@@ -19,14 +20,18 @@ export const HeaderContainer = () => {
     }
   });
 
-  const openAutocomplete = () => {
+  useEffect(() => {
+    const searchInput = document.getElementById("movieSearchInput");
     if (movieList) {
-      console.log(movieList);
+      setShowDropdown(true);
+      // createDropdownMenu(searchInput, movieList);
     }
-  };
+  });
 
-  const onButtonSubmitClick = () => {
-    openAutocomplete();
+
+
+  const onButtonSubmitClick = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
   }
 
   return (
@@ -34,6 +39,9 @@ export const HeaderContainer = () => {
       onButtonSubmitClick={onButtonSubmitClick}
       value={inputValue}
       onChange={(e) => setinputValue(e.target.value)}
+      showDropdown={showDropdown}
+      movieList={movieList}
+      onItemClick={() => setinputValue('pasirinko')}
     />
   );
 };

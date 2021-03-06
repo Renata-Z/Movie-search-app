@@ -1,32 +1,31 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
+import { MovieList } from '../utils/types';
 import { SearchInput } from './SearchInput';
+import { SubmitButton } from './SubmitButton';
 
 interface Props {
-  onButtonSubmitClick: () => void;
+  onButtonSubmitClick: (e: FormEvent<HTMLFormElement>) => void;
   value?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  showDropdown: boolean;
+  movieList: MovieList[];
+  onItemClick: () => void;
 }
 
-export const Header = ({ onButtonSubmitClick, value, onChange }: Props) => {
+export const Header = ({ onButtonSubmitClick, value, onChange, showDropdown, movieList, onItemClick }: Props) => {
   return (
     <header className="App-header">
-      <form className="search-container" autoComplete="off">
-        {/* {!showInput && (
-          <button className="button-input" onClick={onButtonInputClick}>
-            <p className="button-label">Enter movie name</p>
-          </button>
-        )}
-        {showInput && <SearchInput />} */}
+      <form className="search-container" autoComplete="off" onSubmit={onButtonSubmitClick}>
 
         <div className="movie-icon-container">
           <img className="movie-icon" src="icons/movie.svg" alt="movie icon" />
         </div>
 
-        <SearchInput value={value} onChange={onChange} />
+        <SearchInput value={value} onChange={onChange} showDropdown={showDropdown} movieList={movieList}
+          onItemClick={onItemClick} />
 
-        <button type="submit" className="button-submit" onClick={onButtonSubmitClick}>
-          <img className="search-icon" src="icons/search.svg" alt="search icon" />
-        </button>
+        <SubmitButton />
+
       </form>
     </header>
   );
