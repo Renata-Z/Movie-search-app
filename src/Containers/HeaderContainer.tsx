@@ -19,15 +19,15 @@ export const HeaderContainer = () => {
     }
   });
 
-  const onButtonSubmitClick = () => {
-    console.log('searching');
-  };
-
   const openAutocomplete = () => {
     if (movieList) {
       console.log(movieList);
     }
   };
+
+  const onButtonSubmitClick = () => {
+    openAutocomplete();
+  }
 
   return (
     <Header
