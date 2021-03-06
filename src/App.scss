@@ -1,0 +1,154 @@
+@import "styles/_variables";
+@import "styles/_mixins";
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+}
+
+.App  {
+  text-align: center;
+  background-color: blue;
+}
+
+.App-header {
+  background: linear-gradient(135deg,#ff690f 0%,#e8381b 100%);
+  margin: $side-margin;
+  height: 100px;
+  @include flexbox-center();
+  padding: 20px 30px 10px 30px     ;
+  box-sizing: border-box;
+}
+
+.search-container {
+  @include flexbox-center();
+  width: 100%;
+  height: 60px; // var
+}
+
+// .button-input {
+//   @include border-radius();
+//   background-color: $white;
+//   opacity: 0.2;
+//   height: 100%;
+//   width: calc(100% - 80px);
+//   margin-right: 5px;
+//     .button-label {
+//       color: black;
+//     }
+// }
+
+.movie-icon-container {
+  @include input-container();
+  @include flexbox-center();
+  border-radius: 2px 0 0 2px;
+  height: 55px; // ne vienodo aukščio su .search-input
+  width: 40px;
+  padding: 0 10px;
+}
+
+.movie-icon {
+  filter: invert(100%); 
+  width: 26px;
+}
+
+.autocomplete {
+  width: 100%;
+  z-index: 3;
+  position: relative;
+  
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: none;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+div {
+  
+  .autocomplete-items {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid $gray;
+    box-shadow: 3px 2px 2px $gray, -2px 0px 2px $gray;
+      &:hover {
+        background-color: $gray;
+      }
+  }
+
+}
+
+.search-input {
+  @include input-container();
+  height: 55px;
+  width: 100%;
+  padding: 0px;
+  margin-right: 5px;
+  border: none;
+  outline: none;
+  border-radius: 0 2px 2px 0;
+    &::placeholder {
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: white;
+    }
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: white;
+    }
+    &:focus {
+      background-color: rgba(255, 255, 255, 1);
+      height: 60px;
+      width: calc(100% + 55px);
+      @include border-radius();
+      border-radius: 2px 2px 0 0;
+      border-bottom: $gray; // dropdown border-top?
+      margin-top: -5px;
+      border: none;
+      outline: none;
+      text-indent: 50px;
+        &::placeholder {
+          color: black;
+        }
+        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+          color: black;
+        }
+        ::-ms-input-placeholder { /* Microsoft Edge */
+          color: black;
+        }
+        &.button-submit {
+          visibility: hidden;
+        }
+  }
+}
+
+.button-submit {
+  background-color: $white;
+  padding: 10px;
+  height: 55px;
+  width: 55px;
+  @include border-radius();
+  z-index: 1;
+}
+
+.search-icon {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.content-wrapper {
+  margin: $side-margin;
+  background-color: $white;
+  height: calc(100vh - 100px);
+}
