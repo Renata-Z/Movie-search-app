@@ -168,4 +168,17 @@ body {
   margin: $side-margin;
   background-color: $white;
   height: calc(100vh - 100px);
+  position: relative;
+}
+
+.error-message {
+  color: #e8381b;
+  padding: 50px 50px;
+  margin: 0 auto;  
+}
+
+.loader {
+  position: absolute;
+  z-index: 100;
+  width: 30px;
 }

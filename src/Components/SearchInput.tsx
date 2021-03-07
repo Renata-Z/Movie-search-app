@@ -3,14 +3,15 @@ import { MovieList } from '../utils/types';
 import { DropdownMenu } from './DropdownMenu';
 
 interface Props {
-  value?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
   showDropdown: boolean;
-  movieList: MovieList[];
+  moviesList?: MovieList[];
+  loadingMoviesData: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onItemClick: () => void;
 }
 
-export const SearchInput = ({ value, onChange, showDropdown, movieList, onItemClick }: Props) => {
+export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData, onChange, onItemClick }: Props) => {
   return (
     <div className="autocomplete">
       <input
@@ -23,7 +24,9 @@ export const SearchInput = ({ value, onChange, showDropdown, movieList, onItemCl
         value={value}
         onChange={(e) => onChange(e)}
       />
-      {showDropdown && <DropdownMenu optionsArr={movieList} onItemClick={onItemClick} />}
+      {moviesList && showDropdown ?
+        <DropdownMenu optionsArr={moviesList} onItemClick={onItemClick} />
+        : null}
     </div>
   );
 };
