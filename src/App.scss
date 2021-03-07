@@ -35,9 +35,33 @@ body {
   padding: 0 10px;
 }
 
-.movie-icon {
+.movie-icon-white {
   filter: invert(100%); 
   width: 26px;
+}
+
+.movie-icon-input {
+  background-color: $white;
+  @include flexbox-center();
+  height: 55px; // ne vienodo aukščio su .search-input
+  width: 40px;
+  padding: 0 5px;
+  position: absolute;
+  // display: none;
+}
+
+.movie-icon-black {
+  width: 21px;
+}
+
+.input-sub-placeholder {
+    position: absolute;
+    font-size: small;
+    font-weight: 500;
+    color: darkgrey;
+    top: 22px;
+    left: 50px;
+    visibility: hidden;
 }
 
 .autocomplete {
@@ -121,9 +145,15 @@ body {
         ::-ms-input-placeholder { /* Microsoft Edge */
           color: black;
         }
-        &.button-submit {
-          visibility: hidden;
-        }
+        // .button-submit { neveikia, kaip pataisyti????
+        //   visibility: hidden;
+        // }
+        // .movie-icon-input {
+        //   display: flex;
+        // }
+        // .input-sub-placeholder {
+        //   visibility: visible;
+        // }
   }
 }
 

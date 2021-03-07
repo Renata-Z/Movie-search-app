@@ -14,11 +14,14 @@ interface Props {
 export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData, onChange, onItemClick }: Props) => {
   return (
     <div className="autocomplete">
-      {/* <div className="movie-icon-input">
-        <img className="movie-icon-black" src="icons/movie.svg" alt="movie icon" />
-      </div> */}
 
-      <input
+      <div className="movie-icon-input">
+        <img className="movie-icon-black" src="icons/movie.svg" alt="movie icon" />
+      </div>
+
+      <p className={`input-sub-placeholder`}> Enter movie name</p>
+
+      < input
         className="search-input"
         id="movieSearchInput"
         type="text"

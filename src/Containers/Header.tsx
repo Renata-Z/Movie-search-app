@@ -59,7 +59,7 @@ export const Header = () => {
       <form className="search-container" autoComplete="off" onSubmit={onButtonSubmitClick}>
 
         <div className="movie-icon-container">
-          <img className="movie-icon" src="icons/movie.svg" alt="movie icon" />
+          <img className="movie-icon-white" src="icons/movie.svg" alt="movie icon" />
         </div>
 
         <SearchInput
