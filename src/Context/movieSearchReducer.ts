@@ -26,6 +26,11 @@ export const movieSearchReducer = (state: MovieSearchState, action: any) => {
         loadingMoviesData: false,
         errorMovieData: true,
       };
+    case "SHOW_MOVIES_DROPDOWN":
+      return {
+        ...state,
+        showMoviesDropdown: action.isShown,
+      };
     default:
       return state;
   }

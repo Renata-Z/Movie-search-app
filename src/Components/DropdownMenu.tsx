@@ -1,12 +1,10 @@
 import React from 'react';
+import { getYear } from '../utils/functions';
 import { MovieList } from '../utils/types';
 
 interface Props {
-  onItemClick: () => void;
+  onItemClick: (title: string) => void;
   optionsArr: MovieList[];
-  // movieTitle: string;
-  // rating: number;
-  // releaseYear: number;
 }
 
 export const DropdownMenu = ({ onItemClick, optionsArr }: Props) => {
@@ -17,13 +15,13 @@ export const DropdownMenu = ({ onItemClick, optionsArr }: Props) => {
           <li
             className="autocomplete-item"
             key={`${movie.title} ${movie.release_date}`}
-            onClick={onItemClick}>
+            onClick={() => onItemClick(movie.title)}>
 
             <p className="title">{movie.title}</p>
             <p>
               <span>{movie.vote_average} </span>
               <span>Rating, </span>
-              <span>{movie.release_date}</span>
+              <span>{getYear(movie.release_date)}</span>
             </p>
           </li>
         )

@@ -27,6 +27,7 @@ export type MovieSearchAction =
     }
   | {
       type: "SHOW_MOVIES_DROPDOWN";
+      isShown: boolean;
     }
   | {
       type: "LOADING_MOVIES_DATA";

@@ -4,7 +4,6 @@
 }
 
 @mixin input-container() {
-  // height: 70%;
   background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -13,4 +12,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+@mixin box-shadow() {
+  box-shadow: -2px 2px 2px $gray; // pakoreguoti
 }

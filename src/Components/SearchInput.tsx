@@ -8,12 +8,16 @@ interface Props {
   moviesList?: MovieList[];
   loadingMoviesData: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onItemClick: () => void;
+  onItemClick: (title: string) => void;
 }
 
 export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData, onChange, onItemClick }: Props) => {
   return (
     <div className="autocomplete">
+      {/* <div className="movie-icon-input">
+        <img className="movie-icon-black" src="icons/movie.svg" alt="movie icon" />
+      </div> */}
+
       <input
         className="search-input"
         id="movieSearchInput"

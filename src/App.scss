@@ -3,7 +3,6 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  // font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
 }
 
@@ -27,18 +26,6 @@ body {
   height: 60px; // var
 }
 
-// .button-input {
-//   @include border-radius();
-//   background-color: $white;
-//   opacity: 0.2;
-//   height: 100%;
-//   width: calc(100% - 80px);
-//   margin-right: 5px;
-//     .button-label {
-//       color: black;
-//     }
-// }
-
 .movie-icon-container {
   @include input-container();
   @include flexbox-center();
@@ -57,41 +44,27 @@ body {
   width: 100%;
   z-index: 3;
   position: relative;
-  
 }
 
 .autocomplete-list {
   position: absolute;
+  background-color: $white;
   border: 1px solid $gray;
+  @include box-shadow();
   margin: 0;
   z-index: 99;
   padding: 0;
   list-style-type: none;
-  width: calc(100% + 55px);
-  border-top: 1px solid $gray;
+  width: calc(100% + 54px);
   top: 100%;
   left: 0;
   right: 0;
 }
 
-// .autocomplete-list {
-//   position: absolute;
-//   // border: none;
-//   // border-bottom: none;
-//   // border-top: none;
-//   // dropdown border-top?
-//   z-index: 99;
-//   /*position the autocomplete items to be the same width as the container:*/
-//   top: 100%;
-//   left: 0;
-//   right: 0;
-// }
-
 .autocomplete-item {
-  padding: 16px 50px;
+  padding: 15px 50px;
   cursor: pointer;
   background-color: #fff;
-  border-bottom: 1px solid $gray;
     &:hover {
       background-color: $gray;
     }
@@ -110,6 +83,8 @@ body {
   width: 100%;
   padding: 0px;
   margin-right: 5px;
+  color: $white;
+  font-weight: bold;
   border: none;
   outline: none;
   border-radius: 0 2px 2px 0;
@@ -126,11 +101,14 @@ body {
     }
     &:focus {
       background-color: rgba(255, 255, 255, 1);
+      color: $black;
       height: 60px;
       width: calc(100% + 55px);
       @include border-radius();
       border-radius: 2px 2px 0 0;
-      margin-top: -5px;
+      margin-top: -3px;
+      padding-top: 0px;
+      padding-bottom: 5px;
       border: none;
       outline: none;
       text-indent: 50px;
@@ -166,8 +144,10 @@ body {
 
 .content-wrapper {
   margin: $side-margin;
+  padding: 30px 20px;
   background-color: $white;
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
+  height: 100vh;
   position: relative;
 }
 
@@ -180,5 +160,5 @@ body {
 .loader {
   position: absolute;
   z-index: 100;
-  width: 30px;
+  width: 50px;
 }
