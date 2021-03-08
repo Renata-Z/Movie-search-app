@@ -15,13 +15,7 @@ export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData
   return (
     <div className="autocomplete">
 
-      <div className="movie-icon-input">
-        <img className="movie-icon-black" src="icons/movie.svg" alt="movie icon" />
-      </div>
-
-      <p className={`input-sub-placeholder`}> Enter movie name</p>
-
-      < input
+      <input
         className="search-input"
         id="movieSearchInput"
         type="text"
@@ -31,6 +25,13 @@ export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData
         value={value}
         onChange={(e) => onChange(e)}
       />
+
+      <div className="movie-icon-input">
+        <img className="movie-icon-black" src="icons/movie.svg" alt="movie icon" />
+      </div>
+      
+      <p className={`input-label ${value.length > 0 ? "visible" : undefined}`}> Enter movie name</p>
+
       {moviesList && showDropdown ?
         <DropdownMenu optionsArr={moviesList} onItemClick={onItemClick} />
         : null}

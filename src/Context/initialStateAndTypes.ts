@@ -18,10 +18,6 @@ export const initialMovieSearchState: MovieSearchState = {
 
 export type MovieSearchAction =
   | {
-      type: "PAGE_INITIALIZED";
-      showDropdown: boolean;
-    }
-  | {
       type: "SET_INPUT_VALUE";
       value: string;
     }
@@ -34,7 +30,7 @@ export type MovieSearchAction =
     }
   | {
       type: "SET_MOVIES_LIST";
-      data: MovieList[];
+      data?: MovieList[];
     }
   | {
       type: "ERROR_MOVIES_DATA";

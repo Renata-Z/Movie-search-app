@@ -38,6 +38,9 @@ export const Header = () => {
       catch (error) {
         dispatch({ type: 'ERROR_MOVIES_DATA' });
       }
+    } else {
+      dispatch({ type: "SET_MOVIES_LIST" });
+      closeDropdown();
     }
   }, [inputValue, dispatch]);
 

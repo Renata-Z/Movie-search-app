@@ -1,14 +1,15 @@
 @import "styles/_variables";
 @import "styles/_mixins";
 
-body {
+* {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
 }
 
 .App  {
   text-align: center;
-  background-color: blue;
+  background-image: url('https://hdri-skies.com/wp-content/uploads/2017/05/Sky-Background-2-4.jpg');
+  background-size: cover;
 }
 
 .App-header {
@@ -33,35 +34,34 @@ body {
   height: 55px; // ne vienodo aukščio su .search-input
   width: 40px;
   padding: 0 10px;
-}
-
-.movie-icon-white {
-  filter: invert(100%); 
-  width: 26px;
+    img {
+      filter: invert(100%); 
+      width: 26px;
+    }
 }
 
 .movie-icon-input {
   background-color: $white;
-  @include flexbox-center();
   height: 55px; // ne vienodo aukščio su .search-input
   width: 40px;
   padding: 0 5px;
   position: absolute;
-  // display: none;
+  display: none;
+  top: 0;
+  left: 0;
+    img {
+      width: 21px;
+    }
 }
 
-.movie-icon-black {
-  width: 21px;
-}
-
-.input-sub-placeholder {
-    position: absolute;
-    font-size: small;
-    font-weight: 500;
-    color: darkgrey;
-    top: 22px;
-    left: 50px;
-    visibility: hidden;
+.input-label {
+  position: absolute;
+  font-size: 11px;
+  font-weight: 600;
+  color: darkgrey;
+  bottom: 9px;
+  left: 50px;
+  visibility: hidden;
 }
 
 .autocomplete {
@@ -95,6 +95,7 @@ body {
     p {
       margin: 0;
       text-align: left;
+      font-size: 13px;
     }
     .title {
       font-weight: bold;
@@ -148,12 +149,14 @@ body {
         // .button-submit { neveikia, kaip pataisyti????
         //   visibility: hidden;
         // }
-        // .movie-icon-input {
-        //   display: flex;
-        // }
-        // .input-sub-placeholder {
-        //   visibility: visible;
-        // }
+        ~ .movie-icon-input {
+          @include flexbox-center();
+        }
+        ~ .input-label {
+            &.visible {
+              visibility: visible;
+            }
+        }
   }
 }
 
