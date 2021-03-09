@@ -29,12 +29,11 @@ export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData
       <div className="movie-icon-input">
         <img className="movie-icon-black" src="icons/movie.svg" alt="movie icon" />
       </div>
-      
+
       <p className={`input-label ${value.length > 0 ? "visible" : undefined}`}> Enter movie name</p>
 
-      {moviesList && showDropdown ?
-        <DropdownMenu optionsArr={moviesList} onItemClick={onItemClick} />
-        : null}
+      {moviesList && showDropdown &&
+        <DropdownMenu optionsArr={moviesList} onItemClick={onItemClick} /> }
     </div>
   );
 };

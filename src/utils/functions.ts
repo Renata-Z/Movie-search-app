@@ -1,7 +1,3 @@
-import axios, { AxiosResponse } from "axios";
-import { getTypeParameterOwner } from "typescript";
-import { MovieApiData } from "./types";
-
 export const getIsInputFocused = () => {
   const searchInput = document.getElementById("movieSearchInput");
   return document.activeElement === searchInput;

@@ -1,7 +1,6 @@
 import { MovieSearchState } from "./initialStateAndTypes";
 
 export const movieSearchReducer = (state: MovieSearchState, action: any) => {
-  console.log(state, action);
   switch (action.type) {
     case "SET_INPUT_VALUE":
       return {

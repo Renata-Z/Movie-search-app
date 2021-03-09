@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { FormEvent, useEffect } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { SearchInput } from '../Components/SearchInput';
 import { SubmitButton } from '../Components/SubmitButton';
 import { useMovieSearchDispatch, useMovieSearchState } from '../Context/MovieSearchContext';
@@ -33,7 +33,7 @@ export const Header = () => {
           const firstEightMovies = data.results.slice(0, 8);
           dispatch({ type: "SET_MOVIES_LIST", data: firstEightMovies });
         });
-        document.addEventListener('click', () => closeDropdown());
+        window.addEventListener('click', () => closeDropdown());
       }
       catch (error) {
         dispatch({ type: 'ERROR_MOVIES_DATA' });
@@ -42,6 +42,7 @@ export const Header = () => {
       dispatch({ type: "SET_MOVIES_LIST" });
       closeDropdown();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue, dispatch]);
 
   const setInputValue = (value: string) => {
