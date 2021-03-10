@@ -7,23 +7,30 @@ interface Props {
 }
 
 export const DropdownMenu = ({ onItemClick, optionsArr }: Props) => {
+  console.log(optionsArr)
   return (
     <ul className="autocomplete-list">
       {
-        optionsArr.map(movie =>
-          <li
-            className="autocomplete-item"
-            key={`${movie.title} ${movie.release_date}`}
-            onClick={() => onItemClick(movie.title)}>
+        optionsArr.length ? (
+          optionsArr.map(movie =>
+            <li
+              className="autocomplete-item"
+              key={`${movie.title} ${movie.release_date}`}
+              onClick={() => onItemClick(movie.title)}>
 
-            <p className="title">{movie.title}</p>
-            <p>
-              <span>{movie.vote_average} </span>
-              <span>Rating, </span>
-              <span>{movie.release_date ? getYear(movie.release_date) : '-'}</span>
-            </p>
-          </li>
-        )
+              <p className="title">{movie.title}</p>
+              <p>
+                <span>{movie.vote_average} </span>
+                <span>Rating, </span>
+                <span>{movie.release_date ? getYear(movie.release_date) : '-'}</span>
+              </p>
+            </li>
+          ))
+          : (
+            <li className="autocomplete-item" >
+              <p className="title">No match found</p>
+            </li>
+          )
       }
     </ul >
   );

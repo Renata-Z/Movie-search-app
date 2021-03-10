@@ -32,7 +32,7 @@ export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData
 
       <p className={`input-label ${value.length > 0 && "visible" }`}> Enter movie name</p>
 
-      {!!moviesList?.length && showDropdown &&
+      {moviesList && showDropdown &&
         <DropdownMenu optionsArr={moviesList} onItemClick={onItemClick} /> }
     </div>
   );
