@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { FormEvent, useEffect } from 'react';
 import { SearchInput } from '../Components/SearchInput';
 import { SubmitButton } from '../Components/SubmitButton';
+import { ActionTypes } from '../Context/actionTypes';
 import { useMovieSearchDispatch, useMovieSearchState } from '../Context/MovieSearchContext';
 import { getIsInputFocused } from '../utils/functions';
 import { MovieApiData } from '../utils/types';
@@ -17,7 +18,7 @@ export const Header = () => {
   const { dispatch } = useMovieSearchDispatch();
 
   const closeDropdown = () => {
-    dispatch({ type: 'SHOW_MOVIES_DROPDOWN', isShown: false })
+    dispatch({ type: ActionTypes.SHOW_MOVIES_DROPDOWN, isShown: false })
     document.removeEventListener('click', closeDropdown)
   }
 
@@ -26,27 +27,27 @@ export const Header = () => {
     const apiKey = 'e28f9fb961ad7686205a9e20b8f92dcb';
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${inputValue}`;
     if (isInputFocused && inputValue.length >= 3) {
-      dispatch({ type: 'LOADING_MOVIES_DATA' })
+      dispatch({ type: ActionTypes.LOADING_MOVIES_DATA })
       try {
         axios.get(url).then((response: AxiosResponse<MovieApiData>) => {
           const { data } = response;
           const firstEightMovies = data.results.slice(0, 8);
-          dispatch({ type: "SET_MOVIES_LIST", data: firstEightMovies });
+          dispatch({ type: ActionTypes.SET_MOVIES_LIST, data: firstEightMovies });
         });
-        window.addEventListener('click', () => closeDropdown());
+        document.addEventListener('click', () => closeDropdown());
       }
       catch (error) {
-        dispatch({ type: 'ERROR_MOVIES_DATA' });
+        dispatch({ type: ActionTypes.ERROR_MOVIES_DATA });
       }
     } else {
-      dispatch({ type: "SET_MOVIES_LIST" });
+      dispatch({ type: ActionTypes.SET_MOVIES_LIST });
       closeDropdown();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue, dispatch]);
 
   const setInputValue = (value: string) => {
-    dispatch({ type: 'SET_INPUT_VALUE', value });
+    dispatch({ type: ActionTypes.SET_INPUT_VALUE, value });
   }
 
   const onButtonSubmitClick = (e: FormEvent<HTMLFormElement>) => {

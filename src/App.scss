@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background: linear-gradient(135deg,#ff690f 0%,#e8381b 100%);
+  background: linear-gradient(135deg,#ff690f 0%, $red 100%);
   margin: $side-margin;
   height: 100px;
   @include flexbox-center();
@@ -25,14 +25,14 @@
 .search-container {
   @include flexbox-center();
   width: 100%;
-  height: 60px; // var
+  height: 60px;
 }
 
 .movie-icon-container {
-  @include input-container();
+  @include input-container-bg();
   @include flexbox-center();
   border-radius: 2px 0 0 2px;
-  height: 55px;
+  @include input-height-unfocused();
   width: 40px;
   padding: 0 10px;
     img {
@@ -43,9 +43,9 @@
 
 .movie-icon-input {
   background-color: $white;
-  height: 55px;
+  @include input-height-unfocused();
   width: 40px;
-  padding: 0 5px;
+  padding: 0 5px 0 15px;
   position: absolute;
   display: none;
   top: 0;
@@ -60,16 +60,16 @@
   font-size: 11px;
   font-weight: 600;
   color: darkgrey;
-  bottom: 9px;
-  left: 50px;
-  visibility: hidden;
+  bottom: 8px;
+  left: 55px;
+  display: none;
 }
 
 .search-input {
-  @include input-container();
-  height: 55px;
+  @include input-container-bg();
+  @include input-height-unfocused();
   width: 100%;
-  padding: 0px;
+  padding: 0 5px;
   margin-right: 5px;
   color: $white;
   font-weight: bold;
@@ -77,26 +77,24 @@
   outline: none;
   border-radius: 0 2px 2px 0;
     &::placeholder {
-      color: white;
+      color:$white;
       font-weight: bold;
-      padding: 10px;
     }
     &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: white;
+      color: $white;
     }
     ::-ms-input-placeholder { /* Microsoft Edge */
-      color: white;
+      color: $white;
     }
     &:focus {
-      background-color: rgba(255, 255, 255, 1);
+      background-color: $white;
       color: $black;
       height: 60px;
       width: calc(100% + 55px);
       @include border-radius();
       border-radius: 2px 2px 0 0;
       margin-top: -3px;
-      padding-top: 0px;
-      padding-bottom: 5px;
+      padding: 0 5px;
       border: none;
       outline: none;
       text-indent: 50px;
@@ -109,15 +107,12 @@
         ::-ms-input-placeholder { /* Microsoft Edge */
           color: black;
         }
-        // .button-submit { neveikia, kaip pataisyti????
-        //   visibility: hidden;
-        // }
         ~ .movie-icon-input {
           @include flexbox-center();
         }
         ~ .input-label {
             &.visible {
-              visibility: visible;
+              display: block;
             }
         }
   }
@@ -126,8 +121,8 @@
 .button-submit {
   background-color: $white;
   padding: 10px;
-  height: 55px;
-  width: 55px;
+  @include input-height-unfocused();
+  width: $input-height;
   @include border-radius();
   z-index: 1;
 }
@@ -138,7 +133,6 @@
   z-index: 1;
 }
 
-
 .autocomplete {
   width: 100%;
   z-index: 3;
@@ -148,20 +142,19 @@
 .autocomplete-list {
   position: absolute;
   background-color: $white;
-  border: 1px solid $gray;
+  @include border($gray);
   @include box-shadow();
   margin: 0;
   z-index: 99;
   padding: 0;
   list-style-type: none;
-  width: calc(100% + 54px);
+  width: calc(100% + 55px);
   top: 100%;
   left: 0;
-  right: 0;
 }
 
 .autocomplete-item {
-  padding: 15px 50px;
+  padding: 15px 55px;
   cursor: pointer;
   background-color: #fff;
     &:hover {
@@ -187,9 +180,10 @@
 }
 
 .error-message {
-  color: #e8381b;
+  color: $red;
   padding: 50px 50px;
-  margin: 0 auto;  
+  margin: 0 auto;
+  @include border($red);
 }
 
 .loader {

@@ -1,5 +1,7 @@
-export const setInputValue = "SET_INPUT_VALUE";
-export const showMOviesDropdown = "SHOW_MOVIES_DROPDOWN";
-export const loadingMoviesData = "LOADING_MOVIES_DATA";
-export const setMoviesList = "SET_MOVIES_LIST";
-export const errorMoviesData = "ERROR_MOVIES_DATA";
+export enum ActionTypes {
+  SET_INPUT_VALUE = "SET_INPUT_VALUE",
+  SHOW_MOVIES_DROPDOWN = "SHOW_MOVIES_DROPDOWN",
+  SET_MOVIES_LIST = "SET_MOVIES_LIST",
+  LOADING_MOVIES_DATA = "LOADING_MOVIES_DATA",
+  ERROR_MOVIES_DATA = "ERROR_MOVIES_DATA"
+}

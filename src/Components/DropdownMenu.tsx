@@ -1,4 +1,3 @@
-import React from 'react';
 import { getYear } from '../utils/functions';
 import { MovieList } from '../utils/types';
 
@@ -21,7 +20,7 @@ export const DropdownMenu = ({ onItemClick, optionsArr }: Props) => {
             <p>
               <span>{movie.vote_average} </span>
               <span>Rating, </span>
-              <span>{getYear(movie.release_date)}</span>
+              <span>{movie.release_date ? getYear(movie.release_date) : '-'}</span>
             </p>
           </li>
         )

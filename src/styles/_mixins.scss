@@ -3,7 +3,7 @@
   border: none;
 }
 
-@mixin input-container() {
+@mixin input-container-bg() {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -16,4 +16,12 @@
 
 @mixin box-shadow() {
   box-shadow: -1px 4px 4px $gray, 1px 0 3px $gray;
+}
+
+@mixin border($color) {
+  border: 1px solid $color;
+}
+
+@mixin input-height-unfocused() {
+  height: $input-height;
 }

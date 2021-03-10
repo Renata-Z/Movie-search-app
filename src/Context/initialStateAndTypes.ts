@@ -1,4 +1,5 @@
 import { MovieList } from "../utils/types";
+import { ActionTypes } from "./actionTypes";
 
 export interface MovieSearchState {
   inputValue: string;
@@ -18,20 +19,21 @@ export const initialMovieSearchState: MovieSearchState = {
 
 export type MovieSearchAction =
   | {
-      type: "SET_INPUT_VALUE";
+      type: ActionTypes.SET_INPUT_VALUE;
       value: string;
     }
   | {
-      type: "SHOW_MOVIES_DROPDOWN";
+      type: ActionTypes.SHOW_MOVIES_DROPDOWN;
       isShown: boolean;
     }
   | {
-      type: "LOADING_MOVIES_DATA";
+      type: ActionTypes.LOADING_MOVIES_DATA;
     }
   | {
-      type: "SET_MOVIES_LIST";
+      type: ActionTypes.SET_MOVIES_LIST;
       data?: MovieList[];
     }
   | {
-      type: "ERROR_MOVIES_DATA";
+      type: ActionTypes.ERROR_MOVIES_DATA;
     };
+
