@@ -15,5 +15,5 @@
 }
 
 @mixin box-shadow() {
-  box-shadow: -2px 2px 2px $gray; // pakoreguoti
+  box-shadow: -1px 4px 4px $gray, 1px 0 3px $gray;
 }
