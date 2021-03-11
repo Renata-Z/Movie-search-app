@@ -29,10 +29,10 @@
 }
 
 .movie-icon-container {
-  @include input-container-bg();
+  background-color: $input-container-bg;
   @include flexbox-center();
   border-radius: 2px 0 0 2px;
-  @include input-height-unfocused();
+  height: $input-height-unfocused;
   width: 40px;
   padding: 0 10px;
     img {
@@ -43,7 +43,7 @@
 
 .movie-icon-input {
   background-color: $white;
-  @include input-height-unfocused();
+  height: $input-height-unfocused;
   width: 40px;
   padding: 0 5px 0 15px;
   position: absolute;
@@ -66,26 +66,19 @@
 }
 
 .search-input {
-  @include input-container-bg();
-  @include input-height-unfocused();
+  background-color: $input-container-bg;
+  height: $input-height-unfocused;
   width: 100%;
   padding: 0 5px;
-  margin-right: 5px;
   color: $white;
   font-weight: bold;
   border: none;
   outline: none;
   border-radius: 0 2px 2px 0;
-    &::placeholder {
-      color:$white;
-      font-weight: bold;
-    }
-    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: $white;
-    }
-    ::-ms-input-placeholder { /* Microsoft Edge */
-      color: $white;
-    }
+  @include placeholder() {
+    color:$white;
+    font-weight: bold;
+  }
     &:focus {
       background-color: $white;
       color: $black;
@@ -98,15 +91,9 @@
       border: none;
       outline: none;
       text-indent: 50px;
-        &::placeholder {
-          color: black;
-        }
-        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-          color: black;
-        }
-        ::-ms-input-placeholder { /* Microsoft Edge */
-          color: black;
-        }
+      @include placeholder() {
+        color: black;
+      }
         ~ .movie-icon-input {
           @include flexbox-center();
         }
@@ -121,10 +108,11 @@
 .button-submit {
   background-color: $white;
   padding: 10px;
-  @include input-height-unfocused();
-  width: $input-height;
+  height: $input-height-unfocused();
+  width: $input-height-unfocused;
   @include border-radius();
   z-index: 1;
+  margin-left: 5px;
 }
 
 .search-icon {
@@ -143,7 +131,7 @@
   position: absolute;
   background-color: $white;
   @include border($gray);
-  @include box-shadow();
+  box-shadow: $box-shadow;
   margin: 0;
   z-index: 99;
   padding: 0;

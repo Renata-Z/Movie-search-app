@@ -1,10 +1,6 @@
-@mixin  border-radius() {
+@mixin border-radius() {
   border-radius: 2px;
   border: none;
-}
-
-@mixin input-container-bg() {
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 @mixin flexbox-center() {
@@ -14,14 +10,30 @@
   justify-content: center;
 }
 
-@mixin box-shadow() {
-  box-shadow: -1px 4px 4px $gray, 1px 0 3px $gray;
-}
-
 @mixin border($color) {
   border: 1px solid $color;
 }
 
-@mixin input-height-unfocused() {
-  height: $input-height;
+@mixin placeholder() {
+  &::placeholder {
+    @content;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    @content;
+  }
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    @content;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    @content;
+    opacity: 1;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    @content;
+    opacity: 1;
+  }
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    @content;
+  }
 }

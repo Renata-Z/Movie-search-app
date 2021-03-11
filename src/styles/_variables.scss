@@ -1,8 +1,12 @@
-$side-margin: 0 32px;
-$input-height: 55px;
+
 
 // Colors
 $red: #e8381b;
 $white: #FFF;
 $gray: #e8eae9;
 $black: #000000;
+
+$side-margin: 0 32px;
+$input-container-bg: rgba(255, 255, 255, 0.2);
+$input-height-unfocused: 55px;
+$box-shadow: -1px 4px 4px $gray, 1px 0 3px $gray;
