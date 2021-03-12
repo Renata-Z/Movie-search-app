@@ -9,9 +9,10 @@ interface Props {
   loadingMoviesData: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onItemClick: (title: string) => void;
+  onInputFocus: () => void;
 }
 
-export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData, onChange, onItemClick }: Props) => {
+export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData, onChange, onItemClick, onInputFocus }: Props) => {
   return (
     <div className="autocomplete">
 
@@ -24,6 +25,7 @@ export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData
         autoComplete="off"
         value={value}
         onChange={(e) => onChange(e)}
+        onFocus={onInputFocus}
       />
 
       <div className="movie-icon-input">

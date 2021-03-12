@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from 'axios';
-import { FormEvent, useEffect } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { SearchInput } from '../Components/SearchInput';
 import { SubmitButton } from '../Components/SubmitButton';
 import { ActionTypes } from '../Context/actionTypes';
 import { useMovieSearchDispatch, useMovieSearchState } from '../Context/MovieSearchContext';
-import { getIsInputFocused } from '../utils/functions';
 import { MovieApiData } from '../utils/types';
 
 export const Header = () => {
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const { state: {
     inputValue,
@@ -17,13 +17,11 @@ export const Header = () => {
   } } = useMovieSearchState();
   const { dispatch } = useMovieSearchDispatch();
 
-  const closeDropdown = () => {
+  const closeDropdown = useCallback(() => {
     dispatch({ type: ActionTypes.SHOW_MOVIES_DROPDOWN, isShown: false })
-    document.removeEventListener('click', closeDropdown)
-  }
+  }, []);
 
   useEffect(() => {
-    const isInputFocused = getIsInputFocused();
     const apiKey = 'e28f9fb961ad7686205a9e20b8f92dcb';
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${inputValue}`;
     if (isInputFocused && inputValue.length >= 3) {
@@ -34,7 +32,13 @@ export const Header = () => {
           const firstEightMovies = data.results.slice(0, 8);
           dispatch({ type: ActionTypes.SET_MOVIES_LIST, data: firstEightMovies });
         });
-        document.addEventListener('click', () => closeDropdown());
+        const clickHandler = () => {
+          closeDropdown();
+        }
+        document.addEventListener('click', clickHandler);
+        return () => {
+          document.removeEventListener('click', clickHandler);
+        }
       }
       catch (error) {
         dispatch({ type: ActionTypes.ERROR_MOVIES_DATA });
@@ -43,8 +47,7 @@ export const Header = () => {
       dispatch({ type: ActionTypes.SET_MOVIES_LIST });
       closeDropdown();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValue, dispatch]);
+  }, [inputValue, dispatch, closeDropdown, isInputFocused]);
 
   const setInputValue = (value: string) => {
     dispatch({ type: ActionTypes.SET_INPUT_VALUE, value });
@@ -54,7 +57,7 @@ export const Header = () => {
     e.preventDefault();
   }
 
-  const onItemClick = (title: string) => {
+  const onItemClick = (title: string) => { // paspaudus neužsidaro dropdown iš pirmo karto, kai isInputFocused yra komponento state, reik taisyt
     setInputValue(title);
     closeDropdown();
   }
@@ -74,6 +77,7 @@ export const Header = () => {
           moviesList={moviesList}
           onChange={(e) => setInputValue(e.target.value)}
           onItemClick={onItemClick}
+          onInputFocus={() => setIsInputFocused(true)}
         />
 
         <SubmitButton />
@@ -82,3 +86,4 @@ export const Header = () => {
     </header>
   );
 };
+

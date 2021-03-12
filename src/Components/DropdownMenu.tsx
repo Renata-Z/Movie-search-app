@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const DropdownMenu = ({ onItemClick, optionsArr }: Props) => {
-  console.log(optionsArr)
   return (
     <ul className="autocomplete-list">
       {
