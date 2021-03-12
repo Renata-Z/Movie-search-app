@@ -2,18 +2,13 @@ import { MovieList } from "../utils/types";
 import { ActionTypes } from "./actionTypes";
 
 export interface MovieSearchState {
-  inputValue: string;
-  showMoviesDropdown: boolean;
   loadingMoviesData: boolean;
-  moviesList?: MovieList[];
-  errorMovieData: boolean;
+  errorMovieData: boolean
 }
 
 export const initialMovieSearchState: MovieSearchState = {
-  inputValue: "",
-  showMoviesDropdown: false,
   loadingMoviesData: false,
-  moviesList: undefined,
+
   errorMovieData: false,
 };
 

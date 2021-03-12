@@ -1,16 +1,23 @@
 import './App.scss';
 import { ContentContainer } from './Containers/ContentContainer';
 import { Header } from './Containers/Header';
-import { MovieSearchProvider } from './Context/MovieSearchContext';
+import { AppContextProvider } from './Context/MovieSearchContext';
+// import { MovieSearchProvider } from './Context/MovieSearchContext';
 
 const App = () => {
   return (
-    <MovieSearchProvider>
+    <AppContextProvider>
       <div className="App">
         <Header />
         <ContentContainer />
       </div>
-    </MovieSearchProvider>
+    </AppContextProvider>
+    // <MovieSearchProvider>
+    //   <div className="App">
+    //     <Header />
+    //     <ContentContainer />
+    //   </div>
+    // </MovieSearchProvider>
   );
 };
 

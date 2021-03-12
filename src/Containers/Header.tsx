@@ -1,61 +1,75 @@
 import axios, { AxiosResponse } from 'axios';
-import { FormEvent, useEffect } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { SearchInput } from '../Components/SearchInput';
 import { SubmitButton } from '../Components/SubmitButton';
-import { ActionTypes } from '../Context/actionTypes';
-import { useMovieSearchDispatch, useMovieSearchState } from '../Context/MovieSearchContext';
-import { getIsInputFocused } from '../utils/functions';
-import { MovieApiData } from '../utils/types';
+import { useAppContext } from '../Context/MovieSearchContext';
+import { MovieApiData, MovieList } from '../utils/types';
 
 export const Header = () => {
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [moviesList, setMoviesList] = useState<MovieList[]>([]);
 
-  const { state: {
-    inputValue,
-    showMoviesDropdown,
-    loadingMoviesData,
-    moviesList
-  } } = useMovieSearchState();
-  const { dispatch } = useMovieSearchDispatch();
+  const { setIsLoading, setIsError, setSelectedMovie } = useAppContext();
 
-  const closeDropdown = () => {
-    dispatch({ type: ActionTypes.SHOW_MOVIES_DROPDOWN, isShown: false })
-    document.removeEventListener('click', closeDropdown)
-  }
+  const closeDropdown = useCallback(() => {
+    setShowDropdown(false);
+  }, []);
+  const showDropdownWithMovies = useCallback((a: MovieList[]) => {
+    setMoviesList(a);
+    setIsLoadingFn(false);
+    setShowDropdown(true);
+  }, []);
+  const setIsErrorFn = useCallback((a: boolean) => {
+    setIsError && setIsError(a);
+  }, []);
+  const setIsLoadingFn = useCallback((a: boolean) => {
+    setIsLoading && setIsLoading(a);
+  }, []);
 
   useEffect(() => {
-    const isInputFocused = getIsInputFocused();
     const apiKey = 'e28f9fb961ad7686205a9e20b8f92dcb';
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${inputValue}`;
     if (isInputFocused && inputValue.length >= 3) {
-      dispatch({ type: ActionTypes.LOADING_MOVIES_DATA })
+      setIsLoadingFn(true);
       try {
         axios.get(url).then((response: AxiosResponse<MovieApiData>) => {
           const { data } = response;
           const firstEightMovies = data.results.slice(0, 8);
-          dispatch({ type: ActionTypes.SET_MOVIES_LIST, data: firstEightMovies });
+          // setMoviesList(firstEightMovies);
+          // setIsLoadingFn(false);
+          // setShowDropdownFn(true);
+          // setShowDropdown(true);
+          showDropdownWithMovies(firstEightMovies);
+          console.log('a');
         });
-        document.addEventListener('click', () => closeDropdown());
+        const clickHandler = () => {
+          closeDropdown();
+          // setShowDropdownFn(false);
+        }
+        document.addEventListener('click', clickHandler);
+        return () => {
+          document.removeEventListener('click', clickHandler);
+        }
       }
       catch (error) {
-        dispatch({ type: ActionTypes.ERROR_MOVIES_DATA });
+        setIsErrorFn(true);
       }
     } else {
-      dispatch({ type: ActionTypes.SET_MOVIES_LIST });
+      // setMoviesList([]);
       closeDropdown();
+      // setShowDropdownFn(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValue, dispatch]);
-
-  const setInputValue = (value: string) => {
-    dispatch({ type: ActionTypes.SET_INPUT_VALUE, value });
-  }
+  }, [inputValue, isInputFocused, setIsErrorFn, setIsLoadingFn]);
 
   const onButtonSubmitClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   }
 
   const onItemClick = (title: string) => {
-    setInputValue(title);
+    // setInputValue(title);
+    setSelectedMovie && setSelectedMovie(title);
     closeDropdown();
   }
 
@@ -69,11 +83,13 @@ export const Header = () => {
 
         <SearchInput
           value={inputValue}
-          showDropdown={showMoviesDropdown}
-          loadingMoviesData={loadingMoviesData}
+          showDropdown={showDropdown}
+          loadingMoviesData={false}
           moviesList={moviesList}
           onChange={(e) => setInputValue(e.target.value)}
           onItemClick={onItemClick}
+          onInputFocus={() => setIsInputFocused(true)}
+
         />
 
         <SubmitButton />
