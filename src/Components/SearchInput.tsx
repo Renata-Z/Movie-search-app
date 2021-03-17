@@ -6,13 +6,13 @@ interface Props {
   value: string;
   showDropdown: boolean;
   moviesList?: MovieList[];
-  loadingMoviesData: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onItemClick: (title: string) => void;
   onInputFocus: () => void;
+  onInputBlur: () => void;
 }
 
-export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData, onChange, onItemClick, onInputFocus }: Props) => {
+export const SearchInput = ({ value, showDropdown, moviesList, onChange, onItemClick, onInputFocus, onInputBlur }: Props) => {
   return (
     <div className="autocomplete">
 
@@ -26,6 +26,7 @@ export const SearchInput = ({ value, showDropdown, moviesList, loadingMoviesData
         value={value}
         onChange={(e) => onChange(e)}
         onFocus={onInputFocus}
+        onBlur={onInputBlur}
       />
 
       <div className="movie-icon-input">

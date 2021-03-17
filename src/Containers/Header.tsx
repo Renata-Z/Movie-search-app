@@ -12,14 +12,13 @@ export const Header = () => {
   const { state: {
     inputValue,
     showMoviesDropdown,
-    loadingMoviesData,
     moviesList
   } } = useMovieSearchState();
   const { dispatch } = useMovieSearchDispatch();
 
   const closeDropdown = useCallback(() => {
     dispatch({ type: ActionTypes.SHOW_MOVIES_DROPDOWN, isShown: false })
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const apiKey = 'e28f9fb961ad7686205a9e20b8f92dcb';
@@ -45,7 +44,6 @@ export const Header = () => {
       }
     } else {
       dispatch({ type: ActionTypes.SET_MOVIES_LIST });
-      closeDropdown();
     }
   }, [inputValue, dispatch, closeDropdown, isInputFocused]);
 
@@ -57,9 +55,17 @@ export const Header = () => {
     e.preventDefault();
   }
 
-  const onItemClick = (title: string) => { // paspaudus neužsidaro dropdown iš pirmo karto, kai isInputFocused yra komponento state, reik taisyt
+  const onItemClick = (title: string) => {
     setInputValue(title);
     closeDropdown();
+  }
+
+  const onInputFocus = () => {
+    setIsInputFocused(true);
+  }
+
+  const onInputBlur = () => {
+    setIsInputFocused(false);
   }
 
   return (
@@ -73,11 +79,11 @@ export const Header = () => {
         <SearchInput
           value={inputValue}
           showDropdown={showMoviesDropdown}
-          loadingMoviesData={loadingMoviesData}
           moviesList={moviesList}
           onChange={(e) => setInputValue(e.target.value)}
           onItemClick={onItemClick}
-          onInputFocus={() => setIsInputFocused(true)}
+          onInputFocus={onInputFocus}
+          onInputBlur={onInputBlur}
         />
 
         <SubmitButton />
