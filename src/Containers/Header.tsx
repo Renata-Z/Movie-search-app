@@ -21,7 +21,7 @@ export const Header = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const apiKey = '';
+    const apiKey = ''; // enter the apiKey you got from the moviedb
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${inputValue}`;
     if (isInputFocused && inputValue.length >= 3) {
       dispatch({ type: ActionTypes.LOADING_MOVIES_DATA })
