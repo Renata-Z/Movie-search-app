@@ -21,3 +21,4 @@ Find a movie you are interested in.
 - Choose the API section
 - Create API key: click Create and fill the information
 - Get the api_key
+- enter it in /src/Containers/Header/tsx as api_key value
